@@ -1,0 +1,118 @@
+<app-navbar></app-navbar>
+<div class="container py-5" *ngIf="userData">
+    <!-- Profile Card -->
+    <div class="card mx-auto" style="max-width: 600px;">
+        <div class="card-body">
+            <div class="text-center">
+                <img src="https://static.vecteezy.com/system/resources/previews/002/318/271/original/user-profile-icon-free-vector.jpg" alt="User Profile Picture" class="rounded-circle mb-3" style="width: 150px; height: 150px;">
+                <h3 class="card-title">{{userData.name}}</h3>
+                <p class="card-text text-muted">{{userData.username}}</p>
+            </div>
+           
+
+            <ul class="list-group" *ngIf="!editMode">
+                <li class="list-group-item"><strong>Email: </strong> <a href="mailto:{{userData.email}}">{{userData.email|mail}}</a>
+                   </li>
+                <li class="list-group-item"><strong>Phone:</strong> {{userData.phone | phoneFormat}}</li>
+                <li class="list-group-item"><strong>Website: </strong> <a href="https://{{userData.website}}" target="_blank">{{userData.website}}</a></li>
+                <li class="list-group-item">
+                    <strong>Address:</strong>
+                    <p>Street: {{userData.address.street}}, Suite: {{userData.address.suite}}, City: {{userData.address.city}}, Zipcode: {{userData.address.zipcode}}</p>
+                </li>
+            </ul>
+            <div class="text-center">
+                <h3 class="card-title">Company Details</h3>
+                <h6 class="card-text">{{userData.company.name}}</h6>
+                <p class="card-text text-muted">{{userData.company.catchPhrase}}</p>
+                <p class="card-text text-muted">{{userData.company.bs}}</p>
+            </div>
+            
+            <div class="text-center mt-3">
+                <a href="/edit-profile" class="btn btn-primary">Edit Profile</a>
+            </div>
+            
+            <div class="text-center">
+                <p>
+                    <kendo-checkbox [(ngModel)]="editMode"></kendo-checkbox>
+                    <label 
+                      class="k-checkbox-label"
+                      for="editMode"
+                    >Edit Profile</label>
+                  </p>
+            </div>
+
+            <!-- Editable form -->
+
+
+<div *ngIf="editMode">
+    <div class="mb-3">
+        <label for="name" class="form-label"><strong>Name:</strong></label>
+        <kendo-textbox id="name" [(ngModel)]="userData.name" [showSuccessIcon]="userData.name.length >= 3"
+            showErrorIcon="initial"></kendo-textbox>
+    </div>
+   
+    <div class="mb-3">
+        <label for="email" class="form-label"><strong>Email:</strong></label>
+        <kendo-textbox id="email" [(ngModel)]="userData.email" [showSuccessIcon]="userData.email.length >= 3 && userData.email.includes('@')"
+            showErrorIcon="initial"></kendo-textbox>
+    </div>
+    <div class="mb-3">
+        <label for="phone" class="form-label"><strong>Phone:</strong></label>
+        <kendo-maskedtextbox id="phone" [(ngModel)]="userData.phone" ></kendo-maskedtextbox>
+    </div>
+    
+    <div class="mb-3">
+        <label for="website" class="form-label"><strong>Website:</strong></label>
+        <kendo-textbox id="website" [(ngModel)]="userData.website" 
+            showErrorIcon="initial"></kendo-textbox>
+    </div>
+    <div class="mb-3">
+        <label for="street" class="form-label"><strong>Street:</strong></label>
+        <kendo-textbox id="street" [(ngModel)]="userData.address.street" 
+            showErrorIcon="initial"></kendo-textbox>
+    </div>
+    <div class="mb-3">
+        <label for="suite" class="form-label"><strong>Suite:</strong></label>
+        <kendo-textbox id="suite" [(ngModel)]="userData.address.suite" 
+            showErrorIcon="initial"></kendo-textbox>
+    </div>
+    <div class="mb-3">
+        <label for="city" class="form-label"><strong>City:</strong></label>
+        <kendo-dropdownlist id="city" [data]="cityOptions" [(ngModel)]="userData.address.city" 
+            showErrorIcon="initial"></kendo-dropdownlist>
+    </div>
+    <div class="mb-3">
+        <label for="zipcode" class="form-label"><strong>Zipcode:</strong></label>
+        <kendo-textbox id="zipcode" [(ngModel)]="userData.address.zipcode" 
+            showErrorIcon="initial" [showSuccessIcon]="userData.address.zipcode.length==6"></kendo-textbox>
+    </div>
+  
+
+
+        <button kendoButton  themeColor="primary"  *ngIf="!dialogOpened"
+        (click)="open('dialog')">Save</button>
+        <button kendoButton themeColor="secondary" (click)="cancel()">Cancel</button>
+        <kendo-dialog
+        title="Please confirm"
+        *ngIf="dialogOpened"
+        (close)="close()"
+        [minWidth]="250"
+        [width]="450"
+      >
+        <p style="margin: 30px; text-align: center;">
+          Are you sure you want to edit the details?
+        </p>
+        <kendo-dialog-actions>
+          <button kendoButton (click)="close()">No</button>
+          <button kendoButton (click)="updateUser()" themeColor="primary">
+            Yes
+          </button>
+        </kendo-dialog-actions>
+      </kendo-dialog>
+</div>
+            
+        </div>
+    </div>
+</div>
+
+

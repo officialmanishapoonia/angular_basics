@@ -1,0 +1,47 @@
+<app-navbar></app-navbar>
+
+<!-- Grid starts here -->
+<kendo-grid [data]="usersData">
+    <kendo-grid-column field="name" > 
+        <ng-template kendoGridHeaderTemplate>
+            <span style="font-weight: bold;">Name</span>
+          </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column field="username" > 
+        <ng-template kendoGridHeaderTemplate>
+            <span style="font-weight: bold;">UserName</span>
+          </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column field="email" >
+        <ng-template kendoGridHeaderTemplate>
+            <span style="font-weight: bold;">Email</span>
+          </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column field="website" > 
+        <ng-template kendoGridHeaderTemplate>
+            <span style="font-weight: bold;">Website</span>
+          </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column >
+        <ng-template kendoGridHeaderTemplate>
+            <span style="font-weight: bold;">Profile</span>
+          </ng-template>
+        <ng-template kendoGridCellTemplate let-dataItem>
+            
+            <a [routerLink]="['/users', dataItem.id]"> <button kendoButton  fillMode="outline"
+           themeColor="primary">View</button> </a>
+        </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column >
+      <ng-template kendoGridHeaderTemplate>
+          <span style="font-weight: bold;">Delete</span>
+        </ng-template>
+      <ng-template kendoGridCellTemplate let-dataItem>
+          
+          <button kendoButton  fillMode="outline"
+         themeColor="primary" (click)="delete(dataItem.id)">Delete</button> 
+      </ng-template>
+  </kendo-grid-column>
+
+  </kendo-grid>
+
