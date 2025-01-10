@@ -16,35 +16,32 @@ cities=['a','b'];
 
 constructor(private fb: FormBuilder,private usersService:UsersService,private loaderService:LoaderService,private route:Router) {
   this.entryForm = this.fb.group({
-    username: ['', Validators.required],
-    name: ['', Validators.required,Validators.pattern('^[a-zA-Z]+$')],
-    email: ['', Validators.required,Validators.email],
-    phone: ['', Validators.required],
-    website: ['', Validators.required],
+    username: ['', [Validators.required]],
+    name: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]+$')]],
+    email: ['', [Validators.required, Validators.email]],
+    phone: ['', [Validators.required]],
+    website: ['', [Validators.required]],
     address: this.fb.group({
-      street: ['', Validators.required],
-      suite: ['', Validators.required],
-      city: ['', Validators.required],
-      zipcode: ['', Validators.required]
+      street: ['', [Validators.required]],
+      suite: ['', [Validators.required]],
+      city: ['', [Validators.required]],
+      zipcode: ['', [Validators.required]]
     }),
-
     company: this.fb.group({
-      name: ['', Validators.required],
-      catchPhrase: ['', Validators.required],
-      bs: ['', Validators.required]
+      name: ['', [Validators.required]],
+      catchPhrase: ['', [Validators.required]],
+      bs: ['', [Validators.required]]
     })
- 
-    
-    
-
-
-    // Define your form controls here
   });
 
 }
 
-async onSubmit() {
-  if(this.entryForm.valid){
+onSubmit() {
+  if(this.entryForm.invalid){
+    console.log('Please fill all the required fields');
+    this.entryForm.markAllAsTouched();
+    return;
+  }
   this.loaderService.showLoader();
   this.usersService.addUser(this.entryForm.value).subscribe({
     next: (data) => {
@@ -60,12 +57,8 @@ async onSubmit() {
       this.loaderService.hideLoader();
     }
   });
-}
-else{
-  console.log('Please fill the form');
-  this.entryForm.markAllAsTouched();
-  
-}
+
+
 }
 
 }
