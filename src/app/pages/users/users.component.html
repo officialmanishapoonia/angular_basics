@@ -1,5 +1,13 @@
 <app-navbar></app-navbar>
 
+<!-- create new entry field -->
+
+<button class="mb-3 mx-3"
+ kendoButton fillMode="outline"
+            themeColor="primary"  [routerLink]="['/users/new']"
+          >
+            Create New Entry
+          </button>
 <!-- Grid starts here -->
 <kendo-grid [data]="usersData">
     <kendo-grid-column field="name" > 

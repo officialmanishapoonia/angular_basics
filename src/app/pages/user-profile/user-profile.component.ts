@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { UpdateData, User } from '../../model/users.model';
 import { UsersService } from '../../services/users.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { LoaderService } from '../../services/loader.service';
+import { delay } from 'rxjs';
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
@@ -14,16 +16,29 @@ export class UserProfileComponent implements OnInit {
   dialogOpened = false;
   cityOptions = ['New York', 'Los Angeles', 'Chicago', 'Houston', 'Phoenix'];
   userId:number;
-  constructor(private userService:UsersService,private route:ActivatedRoute)
+  constructor(private userService:UsersService,private route:ActivatedRoute,private loaderService:LoaderService,private router:Router)
   {
     this.userId=this.route.snapshot.params['id'];
 
   }
   ngOnInit(): void {
   if(this.userId){
-    this.userService.getUser(this.userId).subscribe((data:User)=>{
-      this.userData=data;
-    });
+    this.loaderService.showLoader();
+    this.userService.getUser(this.userId).pipe(delay(3000)).subscribe({
+      next: (data) => {
+        this.userData = data;
+        // this.loaderService.hideLoader();
+      },
+      error: (error) => {
+        console.log("error",error);
+        this.router.navigate(['/not-found']);
+        this.loaderService.hideLoader();
+    },
+  complete: () => {
+    console.log("complete");
+    this.loaderService.hideLoader();
+  }
+});
   } 
 }
 

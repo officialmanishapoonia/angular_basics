@@ -23,6 +23,11 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import {DropDownsModule} from '@progress/kendo-angular-dropdowns';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { DialogModule} from '@progress/kendo-angular-dialog';
+import { EditUserDetailsComponent } from './pages/edit-user-details/edit-user-details.component';
+import { AddUserComponent } from './pages/add-user/add-user.component';
+import { LoaderComponent } from './components/loader/loader.component';
+import {LoaderModule} from '@progress/kendo-angular-indicators';
+import { LabelModule } from "@progress/kendo-angular-label";
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +38,10 @@ import { DialogModule} from '@progress/kendo-angular-dialog';
     UserProfileComponent,
     PhoneFormatPipe,
     NotFoundComponent,
-    MailPipe
+    MailPipe,
+    EditUserDetailsComponent,
+    AddUserComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +57,9 @@ import { DialogModule} from '@progress/kendo-angular-dialog';
     ReactiveFormsModule,
     DropDownsModule,
     NoopAnimationsModule,
-    DialogModule
+    DialogModule,
+    LoaderModule,
+    LabelModule
   ],
   providers: [provideHttpClient()],
   bootstrap: [AppComponent]

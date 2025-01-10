@@ -30,6 +30,7 @@
     "@progress/kendo-angular-excel-export": "17.2.0",
     "@progress/kendo-angular-grid": "^17.2.0",
     "@progress/kendo-angular-icons": "17.2.0",
+    "@progress/kendo-angular-indicators": "^17.2.0",
     "@progress/kendo-angular-inputs": "17.2.0",
     "@progress/kendo-angular-intl": "17.2.0",
     "@progress/kendo-angular-l10n": "17.2.0",
@@ -50,6 +51,7 @@
     "@progress/kendo-theme-bootstrap": "^10.1.0",
     "@progress/kendo-theme-default": "^10.0.1",
     "bootstrap": "^5.3.3",
+    "json-server": "^1.0.0-beta.3",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.10"

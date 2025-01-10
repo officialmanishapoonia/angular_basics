@@ -18,8 +18,8 @@ export interface Address{
     "geo":Geo
 }
 export interface Geo{
-    "lat":string,
-    "lng":string
+    "lat":string|null,
+    "lng":string|null
 }
 export interface Company{
     "name":string,

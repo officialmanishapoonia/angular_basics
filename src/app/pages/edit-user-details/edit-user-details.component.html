@@ -1,4 +1,5 @@
 <app-navbar></app-navbar>
+
 <div class="container py-5" *ngIf="userData">
     <!-- Profile Card -->
     <div class="card mx-auto" style="max-width: 600px;">
@@ -8,43 +9,14 @@
                 <h3 class="card-title">{{userData.name}}</h3>
                 <p class="card-text text-muted">{{userData.username}}</p>
             </div>
-           
 
-            <ul class="list-group" *ngIf="!editMode">
-                <li class="list-group-item"><strong>Email: </strong> <a href="mailto:{{userData.email}}">{{userData.email|mail}}</a>
-                   </li>
-                <li class="list-group-item"><strong>Phone:</strong> {{userData.phone | phoneFormat}}</li>
-                <li class="list-group-item"><strong>Website: </strong> <a href="https://{{userData.website}}" target="_blank">{{userData.website}}</a></li>
-                <li class="list-group-item">
-                    <strong>Address:</strong>
-                    <p>Street: {{userData.address.street}}, Suite: {{userData.address.suite}}, City: {{userData.address.city}}, Zipcode: {{userData.address.zipcode}}</p>
-                </li>
-            </ul>
-            <div class="text-center">
-                <h3 class="card-title">Company Details</h3>
-                <h6 class="card-text">{{userData.company.name}}</h6>
-                <p class="card-text text-muted">{{userData.company.catchPhrase}}</p>
-                <p class="card-text text-muted">{{userData.company.bs}}</p>
-            </div>
             
-            <div class="text-center mt-3">
-                <a [routerLink]="['/users', userData.id,'edit']" class="btn btn-primary">Edit Profile</a>
-            </div>
-            
-            <div class="text-center">
-                <p>
-                    <kendo-checkbox [(ngModel)]="editMode"></kendo-checkbox>
-                    <label 
-                      class="k-checkbox-label"
-                      for="editMode"
-                    >Edit Profile</label>
-                  </p>
-            </div>
+           
 
             <!-- Editable form -->
 
 
-<div *ngIf="editMode">
+<div >
     <div class="mb-3">
         <label for="name" class="form-label"><strong>Name:</strong></label>
         <kendo-textbox id="name" [(ngModel)]="userData.name" [showSuccessIcon]="userData.name.length >= 3"
@@ -91,7 +63,7 @@
 
         <button kendoButton  themeColor="primary"  *ngIf="!dialogOpened"
         (click)="open('dialog')">Save</button>
-        <button kendoButton themeColor="secondary" (click)="cancel()">Cancel</button>
+        <button kendoButton themeColor="secondary" (click)="cancel()"  [routerLink]="['/users',userData.id]">Cancel</button>
         <kendo-dialog
         title="Please confirm"
         *ngIf="dialogOpened"

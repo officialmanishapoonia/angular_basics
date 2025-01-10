@@ -14,12 +14,14 @@ export class UsersService {
   constructor(private http:HttpClient) { }
 
   getUsers():Observable<User[]>{
-    // console.log(this.http.get<User[]>(this.apiUrl));
     return this.http.get<User[]>(this.apiUrl);
   }
   getUser(id:number):Observable<User>{
-    // console.log(this.http.get<User[]>(this.apiUrl));
     return this.http.get<User>(this.apiUrl+'/'+id);
+  }
+
+  addUser(data:User):Observable<User>{
+    return this.http.post<User>(this.apiUrl,data);
   }
 
   UpdateUser(id:number,data:User):Observable<User>{

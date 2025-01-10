@@ -1,0 +1,158 @@
+<app-navbar></app-navbar>
+
+<div class="container">
+    <form class="k-form k-form-md" [formGroup]="entryForm" (ngSubmit)="onSubmit()"> 
+        <fieldset class="k-form-fieldset">
+            <legend class="k-form-legend">Create New Entry in Users</legend>
+
+            <kendo-avatar
+            imageSrc="https://static.vecteezy.com/system/resources/previews/002/318/271/original/user-profile-icon-free-vector.jpg"
+            width="80px"
+            height="80px"
+            shape="circle"
+          ></kendo-avatar>
+
+          <!-- Entry fields starts here -->        
+            <!-- Name -->
+            <kendo-formfield>
+                <kendo-label [for]="name" text="Name"></kendo-label>
+                <kendo-textbox
+                formControlName="name"
+                [clearButton]="true"
+                #name
+                required
+                ></kendo-textbox>
+    
+                <kendo-formhint>Your Name</kendo-formhint>
+                <kendo-formerror>Error: Name is required</kendo-formerror>
+            </kendo-formfield>
+              <!-- Username -->
+          <kendo-formfield>
+            <kendo-label [for]="username" text="Username"></kendo-label>
+            <kendo-textbox
+              formControlName="username"
+              [clearButton]="true"
+              #username
+              required
+            ></kendo-textbox>
+
+            <kendo-formhint>Your Username</kendo-formhint>
+            <kendo-formerror>Error: Username is required</kendo-formerror>
+          </kendo-formfield>
+
+          <!-- email -->
+            <kendo-formfield>
+                <kendo-label [for]="email" text="Email"></kendo-label>
+                <kendo-textbox
+                formControlName="email"
+                [clearButton]="true"
+                #email
+                required
+                ></kendo-textbox>
+    
+                <kendo-formhint>Your Email</kendo-formhint>
+                <kendo-formerror>Error: Email is required</kendo-formerror>
+            </kendo-formfield>
+
+            <!-- Address -->
+      <div formGroupName="address">
+        <!-- Street -->
+        <kendo-formfield>
+          <kendo-label [for]="street" text="Street"></kendo-label>
+          <kendo-textbox formControlName="street" [clearButton]="true" #street required></kendo-textbox>
+          <kendo-formhint>Your Street</kendo-formhint>
+          <kendo-formerror>Error: Street is required</kendo-formerror>
+        </kendo-formfield>
+
+        <!-- Suite -->
+        <kendo-formfield>
+          <kendo-label [for]="suite" text="Suite"></kendo-label>
+          <kendo-textbox formControlName="suite" [clearButton]="true" #suite required></kendo-textbox>
+          <kendo-formhint>Your Suite</kendo-formhint>
+          <kendo-formerror>Error: Suite is required</kendo-formerror>
+        </kendo-formfield>
+
+        <!-- City -->
+        <kendo-formfield>
+          <kendo-label [for]="city" text="City"></kendo-label>
+          <kendo-dropdownlist
+            formControlName="city"
+            [data]="cities"
+            
+            #city
+            required
+          ></kendo-dropdownlist>
+          <kendo-formhint>Your City</kendo-formhint>
+          <kendo-formerror>Error: City is required</kendo-formerror>
+        </kendo-formfield>
+
+        <!-- Zipcode -->
+        <kendo-formfield>
+          <kendo-label [for]="zipcode" text="Zipcode"></kendo-label>
+          <kendo-textbox formControlName="zipcode" [clearButton]="true" #zipcode required></kendo-textbox>
+          <kendo-formhint>Your Zipcode</kendo-formhint>
+          <kendo-formerror>Error: Zipcode is required</kendo-formerror>
+        </kendo-formfield>
+      </div>
+                <!-- phone -->
+
+                <kendo-formfield>
+                    <kendo-label [for]="phone" text="Phone"></kendo-label>
+                    <kendo-maskedtextbox
+                    formControlName="phone"
+                    [mask]="'(000) 000-0000'"
+                    
+                    #phone
+                    required
+                    ></kendo-maskedtextbox>
+        
+                    <kendo-formhint>Your Phone</kendo-formhint>
+                    <kendo-formerror>Error: Phone is required</kendo-formerror>
+                </kendo-formfield>
+                <!-- website -->
+                <kendo-formfield>
+                    <kendo-label [for]="website" text="Website"></kendo-label>
+                    <kendo-textbox
+                    formControlName="website"
+                    [clearButton]="true"
+                    #website
+                    required
+                    ></kendo-textbox>
+        
+                    <kendo-formhint>Your Website</kendo-formhint>
+                    <kendo-formerror>Error: Website is required</kendo-formerror>
+                </kendo-formfield>
+
+                <!-- company -->
+                <div formGroupName="company">
+                    <kendo-formfield>
+                      <kendo-label [for]="companyName" text="Company"></kendo-label>
+                      <kendo-textbox formControlName="name" [clearButton]="true" #companyName required></kendo-textbox>
+                      <kendo-formhint>Your Company</kendo-formhint>
+                      <kendo-formerror>Error: Company is required</kendo-formerror>
+                    </kendo-formfield>
+            
+                    <kendo-formfield>
+                      <kendo-label [for]="catchPhrase" text="Catch Phrase"></kendo-label>
+                      <kendo-textbox formControlName="catchPhrase" [clearButton]="true" #catchPhrase required></kendo-textbox>
+                      <kendo-formhint>Your Catch Phrase</kendo-formhint>
+                      <kendo-formerror>Error: Catch Phrase is required</kendo-formerror>
+                    </kendo-formfield>
+            
+                    <kendo-formfield>
+                      <kendo-label [for]="bs" text="BS"></kendo-label>
+                      <kendo-textbox formControlName="bs" [clearButton]="true" #bs required></kendo-textbox>
+                      <kendo-formhint>Your BS</kendo-formhint>
+                      <kendo-formerror>Error: BS is required</kendo-formerror>
+                    </kendo-formfield>
+                  </div>
+
+
+
+</fieldset>  
+<div class="k-form-buttons">
+    <button kendoButton [primary]="true" type="submit">Submit</button>
+  </div>
+    </form>
+
+</div>
